@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int defkin(int W, int H, vector<pair<int, int>> position)
+{
+    // your code goes here
+    
+    int n=position.size();
+    vector<int> x_cor;
+    vector<int> y_cor;
+    
+    for(int i=0;i<n;i++)
+    {
+        x_cor.push_back(position[i].first);
+        y_cor.push_back(position[i].second);
+    }
+    sort(begin(x_cor),end(x_cor));
+    sort(begin(y_cor),end(y_cor));
+    
+    vector<int> xd;
+    vector<int> yd;
+    
+    int temp_x=0;
+    int temp_y=0;
+    
+    for(int i=0;i<n;i++)
+    {
+        int X=x_cor[i];
+        int Y=y_cor[i];
+        xd.push_back(X-temp_x-1);
+        temp_x=X;
+        yd.push_back(Y-temp_y-1);
+        temp_y=Y;
+        
+        
+    }
+    xd.push_back(W-temp_x);
+    yd.push_back(H-temp_y);
+    
+    vector<int> xdyd;
+    for(int i=0;i<xd.size();i++)
+        {for(int j=0;j<yd.size();j++)
+            xdyd.push_back(xd[i]*yd[j]);
+        }
+    
+    int max_size=xdyd[0];
+    for(int i=1;i<xdyd.size();i++){
+        max_size=max(max_size,xdyd[i]);
+    }
+    
+    return max_size;
+}
